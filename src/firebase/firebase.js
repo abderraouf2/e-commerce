@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import {  getFirestore,doc,getDoc, setDoc } from "firebase/firestore";
 
 
 const config = {
@@ -14,16 +14,45 @@ const config = {
   measurementId: "G-885BGJ4GD7"
 };
 
+
 // Initialize Firebase
-initializeApp(config);
+const app= initializeApp(config);
+const db = getFirestore(app);
+
+export const createUserProfilDocument= async (userAuth, additionalData)=>{
+  if(!userAuth) return;
+  // const usersCollection= collection(db,'users');
+  const userRef= doc(db,`users/${userAuth.uid}`);
+  const snapShot= await getDoc(userRef);
+ 
+  if(!snapShot.exists()){
+    const {  displayName,email }= userAuth;
+    const createdAt= new Date();
+
+    try{
+      await setDoc(userRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+      console.log("Document written with ID: ", userRef.id);
+    }
+    catch(error){
+      console.log('error creating user', error.message);
+    }
+
+  }
+  return userRef;
+}
+  
 const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({
+provider.setCustomParameters({
     prompt: 'select_account'
   });
 
 export  const auth = getAuth();
 export const signInWithGoogle=()=>signInWithPopup(auth, provider);
 
-  
 
   

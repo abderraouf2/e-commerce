@@ -52,7 +52,7 @@ class signIn extends Component {
           <Costumbutton type="submit" > Sign In </Costumbutton>
           <Costumbutton onClick={ signInWithGoogle } isGoogleSignIn >
               Sign In with Google
-            </Costumbutton>
+          </Costumbutton>
           </div>
         </form>
       </div>
