@@ -24,7 +24,6 @@ class App extends Component {
         id: DocSnap.id,
         ...DocSnap.data()
       })
-      
       }
       setCurrentUser(userAuth);
     })
@@ -57,3 +56,4 @@ const mapDispatchProps=dispatch=>({
 })
 
 export default connect(mapStateToProps, mapDispatchProps)(App);
+
