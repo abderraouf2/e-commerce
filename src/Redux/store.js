@@ -8,5 +8,3 @@
  export const store= createStore(rootReducer, applyMiddleware(...middleWare));
 
  export const  persistor= persistStore(store)
-
- export default {store, persistor}
