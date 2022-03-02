@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import { selectCategory } from '../../Redux/shop-page/shop_page.selector';
 
  const category=({category})=> {
-// const {title, items} = category;
+const {title, items} = category;
+console.log(title);
   return (
     <div className='category'>
-        <h2 className='title'>{category.title}</h2>
+        <h2 className='title'>{title}</h2>
         <div className="items">
           {
-            category.items.map(item=> <CollectionItem key={item.id} item={item}/>)
+            items.map(item=> <CollectionItem key={item.id} item={item}/>)
           }
         </div>
     </div>

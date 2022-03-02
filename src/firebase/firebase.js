@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {  getFirestore,doc,getDoc, setDoc } from "firebase/firestore";
+import {  getFirestore,doc,getDoc, setDoc,collection,writeBatch } from "firebase/firestore";
 
 
 const config = {
@@ -21,7 +21,6 @@ const db = getFirestore(app);
 
 export const createUserProfilDocument= async (userAuth, additionalData)=>{
   if(!userAuth) return;
-  // const usersCollection= collection(db,'users');
   const userRef= doc(db,`users/${userAuth.uid}`);
   const snapShot= await getDoc(userRef);
  
@@ -50,6 +49,19 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
     prompt: 'select_account'
   });
+
+
+  export const AddCollectionsAndDocs= async (collectionKey,object)=>{
+    const collectionRef = collection(db,collectionKey) ;
+
+    const batch= writeBatch(db);
+    Object.keys(object).forEach((obj) => {
+      const newDocRef= doc(collectionRef);
+      batch.set(newDocRef,obj); 
+    });
+    return await batch.commit()
+    
+  }
 
 export  const auth = getAuth();
 export const signInWithGoogle=()=>signInWithPopup(auth, provider);
