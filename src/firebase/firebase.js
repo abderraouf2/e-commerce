@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {  getFirestore,doc,getDoc, setDoc,collection,writeBatch } from "firebase/firestore";
+import {  getFirestore,doc,getDoc, setDoc } from "firebase/firestore";
 
 
 const config = {
@@ -51,17 +51,17 @@ provider.setCustomParameters({
   });
 
 
-  export const AddCollectionsAndDocs= async (collectionKey,object)=>{
-    const collectionRef = collection(db,collectionKey) ;
+  // export const AddCollectionsAndDocs= async (collectionKey,object)=>{
+  //   const collectionRef = collection(db,collectionKey) ;
 
-    const batch= writeBatch(db);
-    Object.keys(object).forEach((obj) => {
-      const newDocRef= doc(collectionRef);
-      batch.set(newDocRef,obj); 
-    });
-    return await batch.commit()
+  //   const batch= writeBatch(db);
+  //   Object.keys(object).forEach((obj) => {
+  //     const newDocRef= doc(collectionRef);
+  //     batch.set(newDocRef,obj); 
+  //   });
+  //   return await batch.commit()
     
-  }
+  // }
 
 export  const auth = getAuth();
 export const signInWithGoogle=()=>signInWithPopup(auth, provider);
