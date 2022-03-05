@@ -14,6 +14,4 @@ const shop  =({match})=> {
   }
 
 
-
-
 export default shop;
