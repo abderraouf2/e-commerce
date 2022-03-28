@@ -7,7 +7,6 @@ import { getDoc } from 'firebase/firestore';
 import { setCurrentUser } from './Redux/user/user.actions';
 import { selectCurrentUser } from './Redux/user/user.selector';
 import {createStructuredSelector} from 'reselect';
-// import { selectCollection } from './Redux/shop-page/shop_page.selector';
 
 import Homepage from "./pages/homepage/homepage";
 import Shop from './pages/shop/shop';
@@ -31,10 +30,6 @@ class App extends Component {
       })
       }
       setCurrentUser(userAuth);
-      // AddCollectionsAndDocs('collections',Object.keys(collectionsArray).map(({title, items})=>({
-      //   title,
-      //   items
-      // })));
     })
   }
 
@@ -46,8 +41,7 @@ render(){
   return (
     <div >
       <Header />
-      <Switch>
-      
+      <Switch>   
       <Route exact path='/' component={Homepage}/>
       <Route path='/shop' component={Shop}/>
       <Route exact path='/signin' render={()=> this.props.currentUser ? (<Redirect to='/'/>) :(<SignInAndSignUp />) } />
@@ -58,8 +52,7 @@ render(){
 }
 }
 const mapStateToProps=createStructuredSelector({
-  currentUser: selectCurrentUser,
-  // collectionsArray: selectCollection
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchProps=dispatch=>({

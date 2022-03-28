@@ -9,7 +9,7 @@ import {HomePageContainer} from './homepage.styles'
 const homepage = () => {
   return (
     <HomePageContainer >
-      <Directory/>
+      <Directory />
     </HomePageContainer>
   );
 };
