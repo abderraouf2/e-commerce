@@ -20,6 +20,11 @@
   .quantity,
   .price {
     width: 23%;
+    @media screen and (max-width:800px){
+      font-size: 1rem;
+      width: 30%;
+      padding: 0 15 px;
+    }
   }
 
   .quantity {
