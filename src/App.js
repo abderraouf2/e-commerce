@@ -8,6 +8,7 @@ import { getDoc } from 'firebase/firestore';
 import { setCurrentUser } from './Redux/user/user.actions';
 import { selectCurrentUser } from './Redux/user/user.selector';
 import {createStructuredSelector} from 'reselect';
+import ItemPage from './pages/ItemPage/ItemPage.component';
 
 import { Globalstyle } from './global.styles';
 
@@ -50,11 +51,12 @@ render(){
       <Route path='/shop' component={Shop}/>
       <Route exact path='/signin' render={()=> this.props.currentUser ? (<Redirect to='/'/>) :(<SignInAndSignUp />) } />
       <Route exact path='/checkout' component={Checkout} />
+      <Route path='/ItemPage/:id' component={ItemPage} />
       </Switch>
     </div>
   );
 }
-}
+} 
 const mapStateToProps=createStructuredSelector({
   currentUser: selectCurrentUser
 })

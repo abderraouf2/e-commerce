@@ -1,16 +1,13 @@
 import React from 'react';
-import CollectionOverview from '../../components/collection-overview/collection-overview';
-import { createStructuredSelector } from 'reselect'
 import { Route } from 'react-router-dom';
-import Collection from '../collection/collection';
-import {isCollectionsFetching,isCollectionLoaded} from '../../Redux/shop/shop.selector'
+
 import { fetchcollectionsStartAsync } from '../../Redux/shop/shop.actions'
-
 import { connect } from 'react-redux';
-import WithSpinner from '../../components/withSpinner/withSpinner';
 
-const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
-const CollectionPageWithSpinner = WithSpinner(Collection)
+import CollectionContainer from '../collection/collection.container';
+import CollectionOverviewContainer from '../../components/collection-overview/collectionOverview.container';
+
+
 
 
 
@@ -26,23 +23,22 @@ class shop extends React.Component {
   }
 
   render(){
-    const { match,isCollectionsFetching,isCollectionLoaded } =  this.props;
+    const { match } =  this.props;
     return (
       <div className='shop-page'>
-        <Route exact path={`${match.path}`} render={(props)=><CollectionOverviewWithSpinner isLoading={isCollectionsFetching} {...props} />} />
-        <Route path={`${match.path}/:collectionId`} render={(props)=><CollectionPageWithSpinner isLoading={!isCollectionLoaded} {...props}  />} />
+        <Route exact path={`${match.path}`} 
+        component={CollectionOverviewContainer}
+        />
+        <Route path={`${match.path}/:collectionId`} 
+          component={CollectionContainer}
+        />
       </div>
     );
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  isCollectionsFetching: isCollectionsFetching,
-  isCollectionLoaded: isCollectionLoaded
-})
-
 const mapDispatchToProps= dispatch=>({
   fetchcollectionsStartAsync: ()=>dispatch(fetchcollectionsStartAsync())
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(shop);
+export default connect(null,mapDispatchToProps)(shop);

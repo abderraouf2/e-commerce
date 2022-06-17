@@ -7,6 +7,8 @@ import {
   PreviewContainer
 } from './preview.style';
 
+
+
 const preview=( { title, items, history, match, routeName } ) =>{
   return (
     <CollectionPreviewContainer>
@@ -20,6 +22,7 @@ const preview=( { title, items, history, match, routeName } ) =>{
           .map((item)=>(<CollectionItem key={item.id} item={item} />))
         }
       </PreviewContainer>
+      
     </CollectionPreviewContainer>
   )
 }

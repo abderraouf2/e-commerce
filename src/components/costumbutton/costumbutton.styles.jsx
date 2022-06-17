@@ -1,4 +1,5 @@
 import styled, {css} from "styled-components";
+import Link from 'react-router-dom'
 
 
 const InvertedButtonStyles= css`
@@ -41,7 +42,7 @@ const GetButtonStyles= (props) =>{
 }
 
 
-export const CustomButtonContainer= styled.button`
+export const CustomButtonContainer= styled.a`
   min-width: 165px;
   width: auto;
   height: 50px;

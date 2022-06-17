@@ -11,7 +11,7 @@ import {
 
 const collection=({collection})=> {
   const {title, items} =collection;
-
+  
   return (
     <CollectionPageContainer>
       <CollectionTitle>{title}</CollectionTitle>
